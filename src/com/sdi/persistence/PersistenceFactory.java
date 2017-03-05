@@ -13,6 +13,8 @@ import com.sdi.persistence.AlumnosDao;
 public interface PersistenceFactory {
 	
 	AlumnosDao createAlumnoDao();
+	TaskDao createTareaDao();
+	CategoryDao createCategoryDao();
 	
 	// ... otros m��todos factoria para Daos de otras entidades del modelo ...
 }

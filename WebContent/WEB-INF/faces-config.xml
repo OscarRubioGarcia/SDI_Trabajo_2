@@ -17,10 +17,16 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
+		<managed-bean-name>listadosController</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanTareas</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>settings</managed-bean-name>
 		<managed-bean-class>com.sdi.presentation.BeanSettings</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -31,6 +37,11 @@
 			<from-action>#{controller.listado}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{listadosController.listado}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listadoMain.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>alta</from-outcome>
