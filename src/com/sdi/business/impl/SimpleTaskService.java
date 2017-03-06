@@ -1,6 +1,6 @@
 package com.sdi.business.impl;
 
-import com.sdi.business.impl.classes.Tasks.*;
+import com.sdi.business.impl.classes.tasks.*;
 
 import java.util.List;
 

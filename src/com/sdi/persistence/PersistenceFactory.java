@@ -15,6 +15,7 @@ public interface PersistenceFactory {
 	AlumnosDao createAlumnoDao();
 	TaskDao createTareaDao();
 	CategoryDao createCategoryDao();
+	UserDao createUserDao();
 	
 	// ... otros m��todos factoria para Daos de otras entidades del modelo ...
 }

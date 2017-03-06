@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
-import com.sdi.persistence.PersistenceException;
+import com.sdi.persistence.exception.PersistenceException;
 
 public class Jdbc {
 	private static final String DATABASE_PROPERTIES_FILE = "database.properties";

@@ -6,6 +6,7 @@ import com.sdi.persistence.AlumnosDao;
 import com.sdi.persistence.CategoryDao;
 import com.sdi.persistence.PersistenceFactory;
 import com.sdi.persistence.TaskDao;
+import com.sdi.persistence.UserDao;
 
 /**
  * Implementaci??????n de la factoria que devuelve implementaci??????n de la capa
@@ -29,6 +30,11 @@ public class SimplePersistenceFactory implements PersistenceFactory {
 	@Override
 	public CategoryDao createCategoryDao() {
 		return new CategoryDaoJdbcImpl();
+	}
+
+	@Override
+	public UserDao createUserDao() {
+		return new UserDaoJdbcImpl();
 	}
 
 }
