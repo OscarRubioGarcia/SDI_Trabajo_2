@@ -16,24 +16,11 @@
 					<p:column>
 						<f:facet name="header">#{msgs.tablaID}</f:facet>#{vtask.id}</p:column>
 					<p:column>
-						<f:facet name="header">#{msgs.tablaPlaneado}</f:facet>#{vtask.datePlanned}</p:column>
+						<f:facet name="header">#{msgs.tablaPlaneado}</f:facet>#{vtask.planned}</p:column>
 					<p:column>
-						<f:facet name="header">#{msgs.tablaNombreTarea}</f:facet>#{vtask.tittle}</p:column>
+						<f:facet name="header">#{msgs.tablaNombreTarea}</f:facet>#{vtask.title}</p:column>
 					<p:column>
 						<f:facet name="header">#{msgs.tablaCategoria}</f:facet>#{vtask.categoryId}</p:column>
-					<p:column>
-						<f:facet name="header">#{msgs.tablaBaja}</f:facet>
-						<p:commandLink action="#{controller.baja(valumno)}" type="submit"
-							value="#{msgs.tablaBaja}" immediate="true" update = "tablalistado">
-						</p:commandLink>
-					</p:column>
-					<p:column>
-						<f:facet name="header">#{msgs.tablaEditar}</f:facet>
-						<p:commandLink action="editar" type="submit"
-							value="#{msgs.tablaEditar}"
-							actionListener="#{alumno.setAlumno(valumno)}" immediate="true">
-						</p:commandLink>
-					</p:column>
 				</p:dataTable>
 			</p:panel>
 		</h:form>

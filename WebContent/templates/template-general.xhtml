@@ -32,6 +32,9 @@
 					<p:separator />
 					<p:menuitem value="#{msgs.enlaceAlta}" action="alta"
 						actionListener="#{alumno.iniciaAlumno}" />
+					<p:separator />
+					<p:menuitem value="#{msgs.enlaceListadoMain}"
+						action="#{listadosController.listado}" />
 				</p:submenu>
 				<p:submenu style="float:right" label="#{msgs.textoIdioma}" icon="ui-icon-document">
 					<p:menuitem value="#{msgs.enlaceIdiomaES}"
