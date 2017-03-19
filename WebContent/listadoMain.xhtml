@@ -12,16 +12,23 @@
 	<ui:define name="cuerpo">
 		<h:form>
 			<p:panel header="#{msgs.tituloListadoMain}">
-				<p:dataTable var="vtask" id="tablalistadoMain" value="#{listadosController.tareas}" rows="10"
+				<p:dataTable var="vtask" id="tablalistadoMain" value="#{listadosController.tareasList}" rows="8"
 					 border="1" paginator="true" 
                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                     rowsPerPageTemplate="5,10,15">
+                     rowsPerPageTemplate="8" 
+                     emptyMessage="No tasks found with the given criteria" 
+                     filteredValue="#{listadosController.tareasFiltrado}" >
 					<p:column>
 						<f:facet name="header">#{msgs.tablaID}</f:facet>#{vtask.id}</p:column>
-					<p:column>
-						<f:facet name="header">#{msgs.tablaPlaneado}</f:facet>#{vtask.planned}</p:column>
-					<p:column>
-						<f:facet name="header">#{msgs.tablaNombreTarea}</f:facet>#{vtask.title}</p:column>
+					
+					<p:column headerText="#{msgs.tablaPlaneado}" sortBy="#{vtask.planned}">
+       					<h:outputText value="#{vtask.planned}" styleClass="#{vtask.planned le (listadosController.currentDate) ? 'red' : null}"/>
+        			</p:column>
+						
+					<p:column filterBy="#{vtask.title}" headerText="#{msgs.tablaNombreTarea}" filterMatchMode="contains">
+           				<h:outputText value="#{vtask.title}" />
+        			</p:column>
+        			
 					<p:column>
 						<f:facet name="header">#{msgs.tablaCategoria}</f:facet>#{vtask.categoryId}</p:column>
 				</p:dataTable>

@@ -1,6 +1,7 @@
 package com.sdi.presentation;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +28,11 @@ public class BeanTareas implements Serializable{
 		
           private Task[] tareas = null;
           
+          private List<Task> tareasList = null;
+          private List<Task> tareasFiltrado = null;
+          
+          private Date currentDate;
+          
 		//Se inicia correctamente el MBean inyectado si JSF lo hubiera crea
 		//y en caso contrario se crea. (hay que tener en cuenta que es un Bean de sesión)
 		//Se usa @PostConstruct, ya que en el contructor no se sabe todavía si el ManagedBean
@@ -34,6 +40,8 @@ public class BeanTareas implements Serializable{
 		@PostConstruct
 		public void init() {
 			System.out.println("BeanTareas - PostConstruct");
+			
+			setCurrentDate(new Date());
 			
 			//Buscamos el alumno en la sesión. Esto es un patrón factoría claramente.
 			tarea = (BeanTarea)
@@ -90,6 +98,8 @@ public class BeanTareas implements Serializable{
 					service = Factories.services.createTaskService();
 					tareas = (Task [])service.getAllTasks().toArray(new Task[0]);
 					
+					setTareasList(service.getAllTasks());
+					
 					return "exito"; 
 					
 				  } catch (Exception e) {
@@ -97,13 +107,17 @@ public class BeanTareas implements Serializable{
 					return "error";  
 				  }
 				  
-		 	  }
+	       }
+	       
 	       public String baja(Task tarea) {
 		       TasksService service;
 				  try {
 					service = Factories.services.createTaskService();
 					service.deleteTarea(tarea.getId());
 					tareas = (Task [])service.getAllTasks().toArray(new Task[0]);
+					
+					setTareasList(service.getAllTasks());
+					
 					return "exito";  
 					
 				  } catch (Exception e) {
@@ -111,7 +125,8 @@ public class BeanTareas implements Serializable{
 					return "error";     
 				  }
 				  
-		 	  }
+	       }
+	       
 	       public String edit() {
 		       TasksService service;
 				  try {
@@ -124,7 +139,7 @@ public class BeanTareas implements Serializable{
 					return "error";
 				  }
 				  
-		 	  }
+	       }
 	       
 	       public String salva() {
 		       TasksService service;
@@ -137,6 +152,7 @@ public class BeanTareas implements Serializable{
 						service.updateTarea(tarea); 
 					} 
 					tareas = (Task [])service.getAllTasks().toArray(new Task[0]);
+					setTareasList(service.getAllTasks());
 					return "exito"; 
 					
 				  } catch (Exception e) {
@@ -145,6 +161,32 @@ public class BeanTareas implements Serializable{
 				  }
 				  
 		 	  }
+
+		public List<Task> getTareasFiltrado() {
+			return tareasFiltrado;
+		}
+
+		public void setTareasFiltrado(List<Task> tareasFiltrado) {
+			this.tareasFiltrado = tareasFiltrado;
+		}
+
+		public Date getCurrentDate() {
+			return currentDate;
+		}
+
+		public void setCurrentDate(Date currentDate) {
+			this.currentDate = currentDate;
+		}
+
+		public List<Task> getTareasList() {
+			return tareasList;
+		}
+
+		public void setTareasList(List<Task> tareasList) {
+			this.tareasList = tareasList;
+		}
+
+		
 	}
 
 
