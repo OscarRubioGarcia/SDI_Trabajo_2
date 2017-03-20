@@ -2,6 +2,8 @@ package com.sdi.persistence.util;
 
 import java.util.List;
 
+import com.sdi.persistence.exception.PersistenceException;
+
 /**
  * Generic interface for all types of Dao
  * @author alb
@@ -23,14 +25,14 @@ public interface GenericDao<T, K> {
 	 * @param dto
 	 * @return The number of affected rows (0 or 1)
 	 */
-	int update(T dto);
+	int update(T dto) throws PersistenceException;
 	
 	/**
 	 * Deletes a table row with the K id key
 	 * @param K key in the table
 	 * @return The number of affected rows (0 or 1)
 	 */
-	int delete(K id);
+	int delete(K id) ;
 	
 	T findById(K id);
 	List<T> findAll();

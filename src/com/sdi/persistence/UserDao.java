@@ -9,4 +9,5 @@ public interface UserDao extends GenericDao<User, Long>{
 	User findByLoginAndPassword(String login, String password);
 	void enableUser(Long id);
 	void disableUser(Long id);
+	int delete(Long id);
 }
