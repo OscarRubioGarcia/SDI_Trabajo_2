@@ -109,6 +109,22 @@ public class BeanTareas implements Serializable{
 				  
 	       }
 	       
+	       public void markFinished(Task tarea) {
+	    	   TasksService service;
+	    	   
+	    	   try {
+	    		   service = Factories.services.createTaskService();
+	    		   
+	    		   tarea.setFinished(new Date());
+	    		   
+	    		   service.updateTarea(tarea);
+	    		   
+	    		   setTareasList(service.getAllTasks());
+	    	   } catch (Exception e) {
+	    		   e.printStackTrace();  
+	    	   }
+	       }
+	       
 	       public String baja(Task tarea) {
 		       TasksService service;
 				  try {
