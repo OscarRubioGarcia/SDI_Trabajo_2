@@ -6,7 +6,7 @@ import com.sdi.model.User;
 import com.sdi.persistence.UserDao;
 import com.sdi.persistence.exception.PersistenceException;
 
-public class UserUpdate {
+public class UsersUpdate {
 
 	public void update(User user) throws EntityNotFoundException {
 		UserDao dao = Factories.persistence.createUserDao();
