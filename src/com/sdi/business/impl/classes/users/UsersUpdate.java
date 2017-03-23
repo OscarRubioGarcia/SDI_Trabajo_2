@@ -18,4 +18,23 @@ public class UsersUpdate {
 		}
 	}
 	
+	public void enable(Long id) throws EntityNotFoundException{
+		UserDao dao = Factories.persistence.createUserDao();
+		try {
+			dao.enableUser(id);
+		}
+		catch (PersistenceException ex) {
+			throw new EntityNotFoundException("User no habilitado " + id, ex);
+		}
+	}
+	
+	public void disable(Long id) throws EntityNotFoundException{
+		UserDao dao = Factories.persistence.createUserDao();
+		try {
+			dao.enableUser(id);
+		}
+		catch (PersistenceException ex) {
+			throw new EntityNotFoundException("User no deshabilitado " + id, ex);
+		}
+	}
 }

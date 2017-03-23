@@ -26,7 +26,7 @@ public class BeanLog implements Serializable {
 		try{
 			service = Factories.services.createUserService();
 			System.out.printf("\nLogin: %s, Password:%s\n",login,password);
-			User localUser = service.findAdminUser(login, password);
+			User localUser = service.findAdmin(login, password);
 			if (localUser == null){
 				System.out.println("Error porque no se encontró al user");
 				return "error";}

@@ -90,12 +90,16 @@ public class BeanUsers implements Serializable {
 	}
 
 	public void iniciaUser(ActionEvent event) {
+<<<<<<< HEAD
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		//ResourceBundle bundle = facesContext.getApplication()
 		//		.getResourceBundle(facesContext, "msgs");
 		
 		user.setId(null);
+=======
+		user.iniciaUser(event);
+>>>>>>> bd96410674f678929b3d1494b89c80b5ecd43cce
 	}
 
 	public String listado() {
@@ -154,7 +158,7 @@ public class BeanUsers implements Serializable {
 			if (user.getId() == null) {
 				service.save(user);
 			} else {
-				service.updateUser(user);
+				service.update(user);
 			}
 			users = (User[]) service.listUsers().toArray(new User[0]);
 			setUsersList(service.listUsers());
@@ -172,7 +176,7 @@ public class BeanUsers implements Serializable {
 		UsersService service;
 		try{
 			service = Factories.services.createUserService();
-			User localUser = service.findAdminUser(login, password);
+			User localUser = service.findAdmin(login, password);
 			if (localUser == null)
 				return "error";
 			// save user in session
