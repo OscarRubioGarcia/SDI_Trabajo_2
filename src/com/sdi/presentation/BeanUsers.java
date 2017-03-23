@@ -103,12 +103,7 @@ public class BeanUsers implements Serializable {
 	}
 
 	public void iniciaUser(ActionEvent event) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		// Obtenemos el archivo de propiedades correspondiente al idioma que
-		// tengamos seleccionado y que viene envuelto en facesContext
-		ResourceBundle bundle = facesContext.getApplication()
-				.getResourceBundle(facesContext, "msgs");
-		user.setId(null);
+		user.iniciaUser(event);
 	}
 
 	public String listado() {
@@ -167,7 +162,7 @@ public class BeanUsers implements Serializable {
 			if (user.getId() == null) {
 				service.save(user);
 			} else {
-				service.updateUser(user);
+				service.update(user);
 			}
 			users = (User[]) service.listUsers().toArray(new User[0]);
 			setUsersList(service.listUsers());
@@ -185,7 +180,7 @@ public class BeanUsers implements Serializable {
 		UsersService service;
 		try{
 			service = Factories.services.createUserService();
-			User localUser = service.findAdminUser(login, password);
+			User localUser = service.findAdmin(login, password);
 			if (localUser == null)
 				return "error";
 			// save user in session

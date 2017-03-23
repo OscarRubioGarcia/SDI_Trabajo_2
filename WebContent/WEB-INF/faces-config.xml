@@ -83,8 +83,20 @@
 			<to-view-id>/altaForm.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>adminLogin</from-outcome>
-			<to-view-id>/adminLogin.xhtml</to-view-id>
+			<from-outcome>log</from-outcome>
+			<to-view-id>/log.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/admindex.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{userController.listado}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listadoUsers</from-outcome>
+			<to-view-id>/listadoUsers.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

@@ -2,6 +2,7 @@ package com.sdi.persistence.util;
 
 import java.util.List;
 
+import com.sdi.persistence.exception.AlreadyPersistedException;
 import com.sdi.persistence.exception.PersistenceException;
 
 /**
@@ -17,8 +18,9 @@ public interface GenericDao<T, K> {
 	 * Saves a DTO to a table row and returns the generated key, if any
 	 * @param dto
 	 * @return The generated key K if any
+	 * @throws AlreadyPersistedException 
 	 */
-	K save(T dto);
+	K save(T dto) throws AlreadyPersistedException;
 
 	/**
 	 * Updates a table row with data from a DTO

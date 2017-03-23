@@ -4,6 +4,7 @@ import com.sdi.business.exception.EntityAlreadyExistsException;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.Task;
 import com.sdi.persistence.TaskDao;
+import com.sdi.persistence.exception.AlreadyPersistedException;
 import com.sdi.persistence.exception.PersistenceException;
 
 public class TasksAlta {
@@ -13,7 +14,7 @@ public class TasksAlta {
 		try {
 			dao.save(tarea);
 		}
-		catch (PersistenceException ex) {
+		catch (PersistenceException | AlreadyPersistedException ex) {
 			throw new EntityAlreadyExistsException("tarea ya existe " + tarea, ex);
 		}
 	}
