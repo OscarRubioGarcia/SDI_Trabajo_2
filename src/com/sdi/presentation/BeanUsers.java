@@ -90,16 +90,15 @@ public class BeanUsers implements Serializable {
 	}
 
 	public void iniciaUser(ActionEvent event) {
-<<<<<<< HEAD
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		//ResourceBundle bundle = facesContext.getApplication()
 		//		.getResourceBundle(facesContext, "msgs");
 		
 		user.setId(null);
-=======
+
 		user.iniciaUser(event);
->>>>>>> bd96410674f678929b3d1494b89c80b5ecd43cce
+
 	}
 
 	public String listado() {
