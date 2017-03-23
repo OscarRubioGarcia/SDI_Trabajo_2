@@ -6,15 +6,17 @@
 	template="/templates/template-general.xhtml">
 
 	<ui:define name="titulo">
-    #{msgs.tituloAdmindex}
-  </ui:define>
-  
-  <ui:define name="cuerpo">
+      #{msgs.tituloHead}
+    </ui:define>
+
+	<ui:define name="cuerpo">
+		 <h:form id="form-principal">
+		 		<ui:include src="/snippets/login.xhtml" />
+		</h:form>
 		
 	</ui:define>
-	
+
 	<ui:define name="pie">
-		<ui:include src="/snippets/pie-casa.xhtml" />
 	</ui:define>
 
 </ui:composition>

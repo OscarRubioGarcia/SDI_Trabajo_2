@@ -17,14 +17,19 @@ public class BeanLog implements Serializable {
 
 	private String login="", password="";
 	
+	public BeanLog() {
+		System.out.println("BeanLogin - No existia");
+	}
+	
 	public String log(){
-		System.out.println("Entro en log");
 		UsersService service;
 		try{
 			service = Factories.services.createUserService();
+			System.out.printf("\nLogin: %s, Password:%s\n",login,password);
 			User localUser = service.findAdminUser(login, password);
-			if (localUser == null)
-				return "error";
+			if (localUser == null){
+				System.out.println("Error porque no se encontró al user");
+				return "error";}
 			
 			// save user in session
 			Map<String, Object> session = FacesContext.getCurrentInstance()
@@ -32,6 +37,7 @@ public class BeanLog implements Serializable {
 			session.put("LOGGEDIN_USER", localUser);
 			return "exito";
 		}catch(Exception e){
+			System.out.println("Error excepción");
 			return "error";
 		}
 	}

@@ -59,6 +59,19 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
+		<from-view-id>/log.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{logController.log}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/admindex.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{logController.log}</from-action>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/log.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{controller.listado}</from-action>
@@ -72,18 +85,6 @@
 		<navigation-case>
 			<from-outcome>adminLogin</from-outcome>
 			<to-view-id>/adminLogin.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/adminLogin.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{logController.log}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/admindex.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>admindex</from-outcome>
-			<to-view-id>/admindex.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

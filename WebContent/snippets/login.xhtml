@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panelGrid id="Grid" columns="2" cellpadding="5">
+	<p:panelGrid id="Grid" columns="2" cellpadding="5" align="center">
   #{msgs.nombre}
   <h:panelGroup>
 			<p:inputText value="#{logController.login}" required="true"
@@ -24,7 +24,7 @@
 		</h:panelGroup>
 		
 		<p:commandButton value="#{msgs.botonEntrar}"
-			action="#{logController.log}" update="Grid">
+			action="#{logController.log}" update="Grid" process="@form">
 		</p:commandButton>
 	</p:panelGrid>
 </ui:composition>
