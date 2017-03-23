@@ -45,6 +45,16 @@ public class TasksListado {
 		TaskDao dao = Factories.persistence.createTareaDao();
 		return  dao.findWeekTasksByUserId(id);
 	}
+	
+	public List<Task> getTasksByUserIdInbox(Long id) {
+		TaskDao dao = Factories.persistence.createTareaDao();
+		return  dao.findInboxTasksByUserId(id);
+	}
+	
+	public List<Task> getFinishedTasksByUserIdInbox(Long id) {
+		TaskDao dao = Factories.persistence.createTareaDao();
+		return  dao.findFinishedTasksInboxByUserId(id);
+	}
 
 	public List<Task> getAllTasks() {
 		TaskDao dao = Factories.persistence.createTareaDao();

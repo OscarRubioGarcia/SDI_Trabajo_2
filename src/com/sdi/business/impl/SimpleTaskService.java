@@ -41,6 +41,16 @@ public class SimpleTaskService implements TasksService {
 	public List<Task> getTareasByUserIdThisWeek(Long id) throws Exception {
 		return new TasksListado().getTasksByUserIdWeek(id);
 	}
+	
+	@Override
+	public List<Task> getTareasByUserIdInbox(Long id) throws Exception {
+		return new TasksListado().getTasksByUserIdInbox(id);
+	}
+	
+	@Override
+	public List<Task> getFinishedTareasByUserIdInbox(Long id) throws Exception {
+		return new TasksListado().getFinishedTasksByUserIdInbox(id);
+	}
 
 	@Override
 	public Task findById(Long id) throws EntityNotFoundException {

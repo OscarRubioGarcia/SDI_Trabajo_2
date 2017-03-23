@@ -44,14 +44,19 @@
 			<to-view-id>/error.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-action>#{listadosController.listado}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listadoMain.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{listadosController.listadoHoy}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listadoHoy.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{listadosController.listadoSemana}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listadoSemana.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>alta</from-outcome>

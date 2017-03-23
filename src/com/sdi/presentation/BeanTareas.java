@@ -1,7 +1,9 @@
 package com.sdi.presentation;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
@@ -13,30 +15,25 @@ import javax.faces.event.ActionEvent;
 import com.sdi.business.TasksService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.Task;
+import com.sdi.model.User;
 
 @ManagedBean(name="listadosController")
 @SessionScoped
 public class BeanTareas implements Serializable{
 	      private static final long serialVersionUID = 55555L;
-		  // Se añade este atributo de entidad para recibir el alumno concreto selecionado de la tabla o de un formulario
-	      // Es necesario inicializarlo para que al entrar desde el formulario de AltaForm.xml se puedan
-	      // dejar los avalores en un objeto existente.
-	      
-	    //uso de inyección de dependencia
+
 	      @ManagedProperty(value="#{tarea}")
 	      private BeanTarea tarea;
 		
           private Task[] tareas = null;
           
           private List<Task> tareasList = null;
+          private List<Task> tareasListSemana = null;
+          private List<Task> tareasListHoy = null;
           private List<Task> tareasFiltrado = null;
           
           private Date currentDate;
           
-		//Se inicia correctamente el MBean inyectado si JSF lo hubiera crea
-		//y en caso contrario se crea. (hay que tener en cuenta que es un Bean de sesión)
-		//Se usa @PostConstruct, ya que en el contructor no se sabe todavía si el ManagedBean
-		//ya estaba construido y en @PostConstruct SI.
 		@PostConstruct
 		public void init() {
 			System.out.println("BeanTareas - PostConstruct");
@@ -79,8 +76,7 @@ public class BeanTareas implements Serializable{
 	       
 	       public void iniciaTarea(ActionEvent event) {
 	    	   FacesContext facesContext = FacesContext.getCurrentInstance();
-	    	   //Obtenemos el archivo de propiedades correspondiente al idioma que
-	    	   //tengamos seleccionado y que viene envuelto en facesContext
+
 	    	   ResourceBundle bundle = facesContext.getApplication().getResourceBundle(facesContext, "msgs");
 	    	   tarea.setId(null);
 	    	   tarea.setCategoryId(null);
@@ -96,17 +92,67 @@ public class BeanTareas implements Serializable{
 		       TasksService service;
 				  try {
 					service = Factories.services.createTaskService();
-					tareas = (Task [])service.getAllTasks().toArray(new Task[0]);
+					//tareas = (Task [])service.getAllTasks().toArray(new Task[0]);
 					
-					setTareasList(service.getAllTasks());
+					Map<String,	Object>	session	= FacesContext
+							.getCurrentInstance()
+							.getExternalContext()
+							.getSessionMap();
+							
+					User user = (User) session.get("LOGGEDIN_USER");
+					
+					setTareasList(service.getTareasByUserIdInbox(user.getId()));
 					
 					return "exito"; 
 					
 				  } catch (Exception e) {
 					e.printStackTrace();  
 					return "error";  
-				  }
-				  
+				  }  
+	       }
+	       
+	       public String listadoHoy() {
+		       TasksService service;
+				  try {
+					service = Factories.services.createTaskService();
+					
+					Map<String,	Object>	session	= FacesContext
+							.getCurrentInstance()
+							.getExternalContext()
+							.getSessionMap();
+					
+					User user = (User) session.get("LOGGEDIN_USER");
+					
+					setTareasListHoy(service.getTareasByUserIdToday(user.getId()));
+					
+					return "exito"; 
+					
+				  } catch (Exception e) {
+					e.printStackTrace();  
+					return "error";  
+				  }  
+	       }
+	       
+	       public String listadoSemana() {
+		       TasksService service;
+				  try {
+					service = Factories.services.createTaskService();
+					
+					Map<String,	Object>	session	= FacesContext
+							.getCurrentInstance()
+							.getExternalContext()
+							.getSessionMap();
+							
+					User user = (User) session.get("LOGGEDIN_USER");
+					
+					setTareasListSemana(service.getTareasByUserIdThisWeek(user.getId()));
+					
+					return "exito"; 
+					
+				  } catch (Exception e) {
+					e.printStackTrace();  
+					return "error";  
+				  }  
 	       }
 	       
 	       public void markFinished(Task tarea) {
@@ -200,6 +246,22 @@ public class BeanTareas implements Serializable{
 
 		public void setTareasList(List<Task> tareasList) {
 			this.tareasList = tareasList;
+		}
+
+		public List<Task> getTareasListSemana() {
+			return tareasListSemana;
+		}
+
+		public void setTareasListSemana(List<Task> tareasListSemana) {
+			this.tareasListSemana = tareasListSemana;
+		}
+
+		public List<Task> getTareasListHoy() {
+			return tareasListHoy;
+		}
+
+		public void setTareasListHoy(List<Task> tareasListHoy) {
+			this.tareasListHoy = tareasListHoy;
 		}
 
 		

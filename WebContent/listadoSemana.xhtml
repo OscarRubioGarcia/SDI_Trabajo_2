@@ -6,13 +6,13 @@
 	template="/templates/template-general.xhtml">
 
 	<ui:define name="titulo">
-    #{msgs.tituloOperacionListadoMain}
+    #{msgs.tituloOperacionListadoSemana}
   </ui:define>
 
 	<ui:define name="cuerpo">
 		<h:form>
 			<p:panel header="#{msgs.tituloListadoMain}">
-				<p:dataTable var="vtask" id="tablalistadoMain" value="#{listadosController.tareasList}" rows="8"
+				<p:dataTable var="vtask" id="tablalistadoMain" value="#{listadosController.tareasListSemana}" rows="8"
 					 border="1" paginator="true" 
                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      emptyMessage="#{msgs.tablaSinResultados}" 
@@ -21,11 +21,11 @@
 						<f:facet name="header">#{msgs.tablaID}</f:facet>#{vtask.id}</p:column>
 					
 					<p:column headerText="#{msgs.tablaPlaneado}" sortBy="#{vtask.planned}">
-       					<h:outputText value="#{vtask.planned}" styleClass="#{vtask.planned le (listadosController.currentDate) ? 'red' : null}"/>
+       					<h:outputText value="#{vtask.planned}" />
         			</p:column>
 						
 					<p:column filterBy="#{vtask.title}" headerText="#{msgs.tablaNombreTarea}" filterMatchMode="contains">
-           				<h:outputText value="#{vtask.title}" />
+           				<h:outputText value="#{vtask.title}" styleClass="#{vtask.planned le (listadosController.currentDate) ? 'red' : null}" />
         			</p:column>
         			
 					<p:column>
@@ -35,7 +35,7 @@
 		                    <p:commandButton icon="ui-icon-trash"
 		                        actionListener="#{listadosController.markFinished(vtask)}"
 		                        ajax="false" />
-                        </div>
+	                 	</div>
                 	</p:column>
 				</p:dataTable>
 			</p:panel>

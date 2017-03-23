@@ -20,13 +20,7 @@ import com.sdi.model.User;
 @SessionScoped
 public class BeanUsers implements Serializable {
 	private static final long serialVersionUID = 55555L;
-	// Se añade este atributo de entidad para recibir el alumno concreto
-	// selecionado de la tabla o de un formulario
-	// Es necesario inicializarlo para que al entrar desde el formulario de
-	// AltaForm.xml se puedan
-	// dejar los avalores en un objeto existente.
 
-	// uso de inyección de dependencia
 	@ManagedProperty(value = "#{user}")
 	private BeanUser user;
 
@@ -55,20 +49,13 @@ public class BeanUsers implements Serializable {
 
 	private Date currentDate;
 
-	// Se inicia correctamente el MBean inyectado si JSF lo hubiera crea
-	// y en caso contrario se crea. (hay que tener en cuenta que es un Bean de
-	// sesión)
-	// Se usa @PostConstruct, ya que en el contructor no se sabe todavía si el
-	// ManagedBean
-	// ya estaba construido y en @PostConstruct SI.
+
 	@PostConstruct
 	public void init() {
 		System.out.println("BeanTareas - PostConstruct");
 
 		setCurrentDate(new Date());
 
-		// Buscamos el alumno en la sesión. Esto es un patrón factoría
-		// claramente.
 		user = (BeanUser) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get(new String("user"));
 
@@ -104,10 +91,10 @@ public class BeanUsers implements Serializable {
 
 	public void iniciaUser(ActionEvent event) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		// Obtenemos el archivo de propiedades correspondiente al idioma que
-		// tengamos seleccionado y que viene envuelto en facesContext
-		ResourceBundle bundle = facesContext.getApplication()
-				.getResourceBundle(facesContext, "msgs");
+
+		//ResourceBundle bundle = facesContext.getApplication()
+		//		.getResourceBundle(facesContext, "msgs");
+		
 		user.setId(null);
 	}
 

@@ -32,5 +32,7 @@ public interface TasksService {
 	void saveTarea(Task tarea) throws EntityAlreadyExistsException, EntityNotFoundException;
 	void updateTarea(Task tarea) throws EntityNotFoundException;
 	void deleteTarea(Long id) throws EntityNotFoundException;
+	List<Task> getFinishedTareasByUserIdInbox(Long id) throws Exception;
+	List<Task> getTareasByUserIdInbox(Long id) throws Exception;
 
 }

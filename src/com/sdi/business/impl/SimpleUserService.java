@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.sdi.business.UsersService;
 import com.sdi.business.exception.BusinessException;
-import com.sdi.business.exception.EntityAlreadyExistsException;
 import com.sdi.business.exception.EntityNotFoundException;
 import com.sdi.business.impl.classes.users.UsersBuscar;
 import com.sdi.model.User;
