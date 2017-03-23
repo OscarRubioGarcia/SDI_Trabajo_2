@@ -129,7 +129,7 @@ public class BeanAlumnos implements Serializable{
 					e.printStackTrace();  
 					return "error";        //Nos vamos a la vista de error.
 				  }
-				  
+
 		 	  }
 	       
 	       public String salva() {

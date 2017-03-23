@@ -26,6 +26,16 @@
 		<managed-bean-class>com.sdi.presentation.BeanSettings</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>userController</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanUsers</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>logController</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanLog</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -58,6 +68,22 @@
 		<navigation-case>
 			<from-outcome>alta</from-outcome>
 			<to-view-id>/altaForm.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>adminLogin</from-outcome>
+			<to-view-id>/adminLogin.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/adminLogin.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{logController.log}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/admindex.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admindex</from-outcome>
+			<to-view-id>/admindex.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

@@ -6,6 +6,6 @@ public interface ServicesFactory {
 	
 	TasksService createTaskService();
 	
-	UserService createUserService();
+	UsersService createUserService();
 
 }

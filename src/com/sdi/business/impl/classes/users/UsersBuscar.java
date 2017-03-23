@@ -16,5 +16,15 @@ public class UsersBuscar {
 		
 		return u;
 	}
+	
+	public User findAdmin(String name, String pass) throws EntityNotFoundException{
+		UserDao dao = Factories.persistence.createUserDao();
+		User u = dao.findByLoginAndPassword(name, pass);
+		if ( u == null) {
+			throw new EntityNotFoundException("No se ha encontrado el usuario");
+		}
+		
+		return u.getIsAdmin()? u:null;
+	}
 }
 

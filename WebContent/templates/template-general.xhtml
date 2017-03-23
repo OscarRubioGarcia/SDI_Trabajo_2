@@ -5,15 +5,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 <f:view locale="#{settings.locale}">
 	<h:head>
 		<title>#{msgs.tituloHead}</title>
 		<style>
-    		.red    {
-	        	color: red ;
-			}
-		</style>
+.red {
+	color: red;
+}
+</style>
 	</h:head>
 	<h:body>
 		<h:form id="form-cabecera">
@@ -24,6 +24,7 @@
 			</center>
 			<br />
 			<br />
+			<h:commandLink value="admin?" action="adminLogin"></h:commandLink>
 			<table border="5" align="center">
 				<tr>
 					<th class="title"><ui:insert name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
@@ -41,11 +42,12 @@
 					<p:menuitem value="#{msgs.enlaceListadoMain}"
 						action="#{listadosController.listado}" />
 				</p:submenu>
-				<p:submenu style="float:right" label="#{msgs.textoIdioma}" icon="ui-icon-document">
+				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
+					icon="ui-icon-document">
 					<p:menuitem value="#{msgs.enlaceIdiomaES}"
 						actionListener="#{settings.setSpanish}" update="@all" />
 					<p:menuitem value="#{msgs.enlaceIdiomaEN}"
-						actionListener="#{settings.setEnglish}" update="@all" /> 
+						actionListener="#{settings.setEnglish}" update="@all" />
 				</p:submenu>
 			</p:menubar>
 
