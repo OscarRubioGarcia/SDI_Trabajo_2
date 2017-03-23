@@ -6,18 +6,16 @@
 	template="/templates/template-general.xhtml">
 
 	<ui:define name="titulo">
-    #{msgs.tituloAdmindex}
-  </ui:define>
-  
-  <ui:define name="cuerpo">
-  		Administra administrador
-  		<h:form>
-  			<p:commandLink value="listadoUsuarios" action="#{userController.listado}"></p:commandLink>
-  		</h:form>
+      #{msgs.tituloHead}
+    </ui:define>
+    
+
+	<ui:define name="cuerpo">	
+		<h:form id="form-principal">
+		</h:form>
 	</ui:define>
-	
+
 	<ui:define name="pie">
-		<ui:include src="/snippets/pie-casa.xhtml" />
 	</ui:define>
 
 </ui:composition>
