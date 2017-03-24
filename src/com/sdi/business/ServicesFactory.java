@@ -8,4 +8,5 @@ public interface ServicesFactory {
 	
 	UsersService createUserService();
 
+	CategoriesService createCategoryService();
 }

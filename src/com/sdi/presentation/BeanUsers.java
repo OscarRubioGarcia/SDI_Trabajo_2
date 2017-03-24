@@ -10,6 +10,7 @@ import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import com.sdi.business.CategoriesService;
 import com.sdi.business.TasksService;
 import com.sdi.business.UsersService;
 import com.sdi.infrastructure.Factories;
@@ -133,13 +134,17 @@ public class BeanUsers implements Serializable {
 	public String baja(User user) {
 		UsersService service;
 		TasksService taskService;
-
+		CategoriesService categoryService;
+		
 		try {
 			service = Factories.services.createUserService();
 			service.deleteUser(user.getId()); // CHRSN: or delete?
 			
 			taskService = Factories.services.createTaskService();
 			taskService.deleteTareaByUserId(user.getId());
+			
+			categoryService = Factories.services.createCategoryService();
+			categoryService.deleteAllByUserId(user.getId());
 			
 			users = (User[]) service.listUsers().toArray(new User[0]);
 
@@ -148,7 +153,6 @@ public class BeanUsers implements Serializable {
 			return "exito";
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "error";
 		}
 
@@ -190,14 +194,14 @@ public class BeanUsers implements Serializable {
 		UsersService service;
 		try{
 			service = Factories.services.createUserService();
-			if (userr.getStatus()==UserStatus.ENABLED) 
+			if (userr.getStatus()==UserStatus.ENABLED)
 				service.disableUser(userr.getId());
 			else
 				service.enableUser(userr.getId());
 			
 			return "exito";
 		} catch(Exception e){
-			return "error";
+			return "error";		
 		}
 	}
 	
