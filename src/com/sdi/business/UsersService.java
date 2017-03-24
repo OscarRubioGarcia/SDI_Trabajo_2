@@ -9,13 +9,12 @@ import com.sdi.model.User;
 
 public interface UsersService {
 
-	//public User findLoggableUser(String login, String password) throws BusinessException;
 	public List<User> listUsers() throws BusinessException;
 	public void enableUser(Long id) throws BusinessException, EntityNotFoundException;
 	public void disableUser(Long id) throws BusinessException, EntityNotFoundException;
 	public Long save(User user) throws BusinessException, EntityAlreadyExistsException;;
 	
-	public void update(User tarea) throws EntityNotFoundException;
+	public void update(User user) throws EntityNotFoundException;
 	public User findAdmin(String name, String pass) throws EntityNotFoundException;
 	public User find(String login, String password) throws EntityNotFoundException;
 }

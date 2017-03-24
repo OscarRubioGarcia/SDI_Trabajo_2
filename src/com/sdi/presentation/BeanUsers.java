@@ -3,8 +3,6 @@ package com.sdi.presentation;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -15,6 +13,7 @@ import javax.faces.event.ActionEvent;
 import com.sdi.business.UsersService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.User;
+import com.sdi.model.types.UserStatus;
 
 @ManagedBean(name = "userController")
 @SessionScoped
@@ -77,8 +76,8 @@ public class BeanUsers implements Serializable {
 		return (users);
 	}
 
-	public void setUser(BeanUser user) {
-		this.user = user;
+	public void setUser(User user) {
+		this.user = (BeanUser) user;
 	}
 
 	public BeanUser getUser() {
@@ -90,7 +89,7 @@ public class BeanUsers implements Serializable {
 	}
 
 	public void iniciaUser(ActionEvent event) {
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		//FacesContext facesContext = FacesContext.getCurrentInstance();
 
 		//ResourceBundle bundle = facesContext.getApplication()
 		//		.getResourceBundle(facesContext, "msgs");
@@ -101,6 +100,10 @@ public class BeanUsers implements Serializable {
 
 	}
 
+	/**
+	 * Muestra todos los usuarios registrados
+	 * @return
+	 */
 	public String listado() {
 		UsersService service;
 		try {
@@ -109,7 +112,7 @@ public class BeanUsers implements Serializable {
 
 			setUsersList(service.listUsers());
 
-			return "exito"; // vamos a vista admindex.xhtml
+			return "exito"; // vamos a vista listadoUsers.xhtml
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,6 +121,10 @@ public class BeanUsers implements Serializable {
 
 	}
 
+	/**
+	 * elimina a un usuario
+	 * @param user
+	 */
 	public String baja(User user) {
 		UsersService service;
 		try {
@@ -136,15 +143,13 @@ public class BeanUsers implements Serializable {
 
 	}
 
-	public String edit() {
+	public String edit(User user) {
 		UsersService service;
 		try {
 			service = Factories.services.createUserService();
-			// TODO: user = (BeanUser) service.findLoggableUser(user.getId());
+			service.update(user);
 			return "exito";
-
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "error";
 		}
 
@@ -169,24 +174,22 @@ public class BeanUsers implements Serializable {
 		}
 
 	}
-
-	public String log(){
-		System.out.println("Entro en log");
+	
+	public String changeStatus(){
 		UsersService service;
 		try{
 			service = Factories.services.createUserService();
-			User localUser = service.findAdmin(login, password);
-			if (localUser == null)
-				return "error";
-			// save user in session
-			Map<String, Object> session = FacesContext.getCurrentInstance()
-					.getExternalContext().getSessionMap();
-			session.put("LOGGEDIN_USER", localUser);
+			if (user.getStatus()==UserStatus.ENABLED) 
+				service.disableUser(user.getId());
+			else
+				service.enableUser(user.getId());
+			
 			return "exito";
-		}catch(Exception e){
+		} catch(Exception e){
 			return "error";
 		}
 	}
+	
 	
 	public List<User> getUsersFiltrado() {
 		return usersFiltrado;

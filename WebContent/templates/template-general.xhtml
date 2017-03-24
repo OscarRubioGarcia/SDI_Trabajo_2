@@ -13,8 +13,6 @@
 .red {
 	color: red;
 }
-.invisible{display:none;}
-.visible{display:block;}
 
 </style>
 	</h:head>
@@ -35,8 +33,8 @@
 			</table>
 			<p:menubar>
 				<p:submenu label="#{msgs.tituloOpciones}" icon="ui-icon-document">
-					<p:menuitem value="#{msgs.enlaceAlta}" action="alta"
-						actionListener="#{alumno.iniciaAlumno}" rendered="#{logController.currentUser.isAdmin}"/>
+					<p:menuitem value="#{msgs.enlaceListadoUsuarios}" action="#{userController.listado}"
+					 rendered="#{logController.currentUser.isAdmin}"/>
 					<p:separator />
 					<p:menuitem value="#{msgs.enlaceListadoMain}"
 						action="#{listadosController.listado}" />

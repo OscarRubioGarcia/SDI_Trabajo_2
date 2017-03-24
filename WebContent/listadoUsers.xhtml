@@ -12,26 +12,35 @@
 	<ui:define name="cuerpo">
 		<h:form>
 			<p:panel header="#{msgs.tituloOperacionListado}">
-				<p:dataTable var="vuser" id="tablalistado" value="#{userController.users}" border="1">
-					<p:column>
-						<f:facet name="header">#{msgs.tablaApellidos}</f:facet>#{vuser.email}</p:column>
+				<p:dataTable var="vuser" id="tablalistado" value="#{userController.usersList}" border="1">
 					<p:column>
 						<f:facet name="header">#{msgs.tablaIdUser}</f:facet>#{vuser.id}</p:column>
 					<p:column>
+						<f:facet name="header">#{msgs.tablaCorreo}</f:facet>#{vuser.email}</p:column>
+					<p:column sortBy="#{vuser.login}">
 						<f:facet name="header">#{msgs.tablaNombre}</f:facet>#{vuser.login}</p:column>
+					<p:column sortBy="#{vuser.isAdmin}">
+						<f:facet name="header">#{msgs.tablaIsAdmin}</f:facet>#{vuser.isAdmin}</p:column>
+					<p:column sortBy="#{vuser.status}">
+						<f:facet name="header">#{msgs.tablaStatus}</f:facet>
+						<p:commandLink action="#{userController.changeStatus()}" type="submit"
+							value="#{vuser.status}"
+							actionListener="#{userController.setUser(vuser)}" immediate="true">
+						</p:commandLink>
+					</p:column>
 					<p:column>
 						<f:facet name="header">#{msgs.tablaBaja}</f:facet>
 						<p:commandLink action="#{userController.baja(vuser)}" type="submit"
 							value="#{msgs.tablaBaja}" immediate="true" update = "tablalistado">
 						</p:commandLink>
 					</p:column>
-					<p:column>
+					<!-- <p:column>
 						<f:facet name="header">#{msgs.tablaEditar}</f:facet>
 						<p:commandLink action="editar" type="submit"
 							value="#{msgs.tablaEditar}"
 							actionListener="#{user.setUser(vuser)}" immediate="true">
 						</p:commandLink>
-					</p:column>
+					</p:column> -->
 				</p:dataTable>
 			</p:panel>
 		</h:form>

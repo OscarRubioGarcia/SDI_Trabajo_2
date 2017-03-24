@@ -14,12 +14,6 @@ import com.sdi.model.User;
 
 public class SimpleUserService implements UsersService {
 
-//	@Override
-//	public User findLoggableUser(String login, String password)
-//			throws BusinessException {
-//		return null;//new UsersBuscar().find(id);
-//	}
-
 	@Override
 	public List<User> listUsers() throws BusinessException {
 		return new UsersListado().getAllUsers();
