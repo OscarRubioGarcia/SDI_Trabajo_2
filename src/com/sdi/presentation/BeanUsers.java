@@ -10,6 +10,7 @@ import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import com.sdi.business.TasksService;
 import com.sdi.business.UsersService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.User;
@@ -23,6 +24,8 @@ public class BeanUsers implements Serializable {
 	@ManagedProperty(value = "#{user}")
 	private BeanUser user;
 
+	private User userr;
+	
 	private String login="", password="";
 	
 	public String getLogin() {
@@ -76,10 +79,12 @@ public class BeanUsers implements Serializable {
 		return (users);
 	}
 
-	public void setUser(User user) {
-		this.user = (BeanUser) user;
+	public void setUser(BeanUser user) {
+		this.user = user;
 	}
-
+	public void setUserr(User user) {
+		this.userr =  user;
+	}
 	public BeanUser getUser() {
 		return user;
 	}
@@ -122,14 +127,20 @@ public class BeanUsers implements Serializable {
 	}
 
 	/**
-	 * elimina a un usuario
+	 * elimina a un usuario, sus tareas y sus categorías
 	 * @param user
 	 */
 	public String baja(User user) {
 		UsersService service;
+		TasksService taskService;
+
 		try {
 			service = Factories.services.createUserService();
-			service.disableUser(user.getId()); // CHRSN: or delete?
+			service.deleteUser(user.getId()); // CHRSN: or delete?
+			
+			taskService = Factories.services.createTaskService();
+			taskService.deleteTareaByUserId(user.getId());
+			
 			users = (User[]) service.listUsers().toArray(new User[0]);
 
 			setUsersList(service.listUsers());
@@ -175,14 +186,14 @@ public class BeanUsers implements Serializable {
 
 	}
 	
-	public String changeStatus(){
+	public String changeStatus(User userr){
 		UsersService service;
 		try{
 			service = Factories.services.createUserService();
-			if (user.getStatus()==UserStatus.ENABLED) 
-				service.disableUser(user.getId());
+			if (userr.getStatus()==UserStatus.ENABLED) 
+				service.disableUser(userr.getId());
 			else
-				service.enableUser(user.getId());
+				service.enableUser(userr.getId());
 			
 			return "exito";
 		} catch(Exception e){

@@ -16,4 +16,14 @@ public class TasksBaja {
 			throw new EntityNotFoundException("Tarea no eliminada " + id, ex);
 		}
 	}
+
+	public void deleteByUserId(Long id) throws EntityNotFoundException {
+		TaskDao dao = Factories.persistence.createTareaDao();
+		try {
+			dao.deleteAllFromUserId(id);
+		}
+		catch (PersistenceException ex) {
+			throw new EntityNotFoundException("Tarea no eliminada " + id, ex);
+		}
+	}
 }

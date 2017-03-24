@@ -31,10 +31,20 @@ public class UsersUpdate {
 	public void disable(Long id) throws EntityNotFoundException{
 		UserDao dao = Factories.persistence.createUserDao();
 		try {
-			dao.enableUser(id);
+			dao.disableUser(id);
 		}
 		catch (PersistenceException ex) {
 			throw new EntityNotFoundException("User no deshabilitado " + id, ex);
 		}
+	}
+
+	public void delete(Long id) throws EntityNotFoundException {
+		UserDao dao = Factories.persistence.createUserDao();
+		try {
+			dao.delete(id);
+		}
+		catch (PersistenceException ex) {
+			throw new EntityNotFoundException("User no eliminado " + id, ex);
+		}		
 	}
 }

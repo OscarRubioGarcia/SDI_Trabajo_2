@@ -23,9 +23,8 @@
 						<f:facet name="header">#{msgs.tablaIsAdmin}</f:facet>#{vuser.isAdmin}</p:column>
 					<p:column sortBy="#{vuser.status}">
 						<f:facet name="header">#{msgs.tablaStatus}</f:facet>
-						<p:commandLink action="#{userController.changeStatus()}" type="submit"
-							value="#{vuser.status}"
-							actionListener="#{userController.setUser(vuser)}" immediate="true">
+						<p:commandLink action="#{userController.changeStatus(vuser)}" type="submit"
+							value="#{vuser.status}" immediate="true" update = "tablalistado">
 						</p:commandLink>
 					</p:column>
 					<p:column>

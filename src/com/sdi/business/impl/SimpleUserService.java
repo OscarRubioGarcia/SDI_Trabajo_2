@@ -50,5 +50,10 @@ public class SimpleUserService implements UsersService {
 	public User find(String login, String password) throws EntityNotFoundException {
 		return new UsersBuscar().find(login, password);
 	}
+
+	@Override
+	public void deleteUser(Long id) throws EntityNotFoundException {
+		new UsersUpdate().delete(id);
+	}
 	
 }

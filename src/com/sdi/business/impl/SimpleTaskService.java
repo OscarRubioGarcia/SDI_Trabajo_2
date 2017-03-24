@@ -77,5 +77,10 @@ public class SimpleTaskService implements TasksService {
 		return new TasksListado().getAllTasks();
 	}
 
+	@Override
+	public void deleteTareaByUserId(Long id) throws EntityNotFoundException {
+		new TasksBaja().deleteByUserId(id);
+	}
+
 	
 }
