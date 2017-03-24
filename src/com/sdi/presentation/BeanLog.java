@@ -16,6 +16,7 @@ public class BeanLog implements Serializable {
 	private static final long serialVersionUID = 55555L;
 
 	private String login="", password="";
+	private User currentUser;
 	
 	public BeanLog() {
 		System.out.println("BeanLogin - No existia");
@@ -25,12 +26,12 @@ public class BeanLog implements Serializable {
 		UsersService service;
 		try{
 			service = Factories.services.createUserService();
-			System.out.printf("\nLogin: %s, Password:%s\n",login,password);
-			User localUser = service.findAdmin(login, password);
+			User localUser = service.find(login, password);
 			if (localUser == null){
 				System.out.println("Error porque no se encontró al user");
 				return "error";}
 			
+			setCurrentUser(localUser);
 			// save user in session
 			Map<String, Object> session = FacesContext.getCurrentInstance()
 					.getExternalContext().getSessionMap();
@@ -56,5 +57,13 @@ public class BeanLog implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
 	}
 }

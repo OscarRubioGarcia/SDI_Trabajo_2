@@ -17,4 +17,5 @@ public interface UsersService {
 	
 	public void update(User tarea) throws EntityNotFoundException;
 	public User findAdmin(String name, String pass) throws EntityNotFoundException;
+	public User find(String login, String password) throws EntityNotFoundException;
 }

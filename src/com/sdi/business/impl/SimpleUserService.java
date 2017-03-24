@@ -51,5 +51,10 @@ public class SimpleUserService implements UsersService {
 			EntityAlreadyExistsException {
 		return new UsersAlta().save(user);
 	}
+
+	@Override
+	public User find(String login, String password) throws EntityNotFoundException {
+		return new UsersBuscar().find(login, password);
+	}
 	
 }

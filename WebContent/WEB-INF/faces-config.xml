@@ -68,7 +68,7 @@
 		<navigation-case>
 			<from-action>#{logController.log}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/admindex.xhtml</to-view-id>
+			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{logController.log}</from-action>

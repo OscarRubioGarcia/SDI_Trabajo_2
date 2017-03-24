@@ -27,7 +27,6 @@
 			</center>
 			<br />
 			<br />
-			<h:commandLink value="admin?" action="log"></h:commandLink>
 			<table border="5" align="center">
 				<tr>
 					<th class="title"><ui:insert name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>
@@ -37,7 +36,7 @@
 			<p:menubar>
 				<p:submenu label="#{msgs.tituloOpciones}" icon="ui-icon-document">
 					<p:menuitem value="#{msgs.enlaceAlta}" action="alta"
-						actionListener="#{alumno.iniciaAlumno}" />
+						actionListener="#{alumno.iniciaAlumno}" rendered="#{logController.currentUser.isAdmin}"/>
 					<p:separator />
 					<p:menuitem value="#{msgs.enlaceListadoMain}"
 						action="#{listadosController.listado}" />
