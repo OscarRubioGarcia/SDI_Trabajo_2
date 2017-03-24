@@ -33,6 +33,7 @@ public class BeanTareas implements Serializable{
           private List<Task> tareasFiltrado = null;
           
           private Date currentDate;
+          private boolean toggleInbox = true;
           
 		@PostConstruct
 		public void init() {
@@ -102,6 +103,32 @@ public class BeanTareas implements Serializable{
 					User user = (User) session.get("LOGGEDIN_USER");
 					
 					setTareasList(service.getTareasByUserIdInbox(user.getId()));
+					mostrarTareas();
+					
+					return "exito"; 
+					
+				  } catch (Exception e) {
+					e.printStackTrace();  
+					return "error";  
+				  }  
+	       }
+	       
+	       public String mostrarTareas() {
+	    	   TasksService service;
+				  try {
+					service = Factories.services.createTaskService();
+					
+					Map<String,	Object>	session	= FacesContext
+							.getCurrentInstance()
+							.getExternalContext()
+							.getSessionMap();
+							
+					User user = (User) session.get("LOGGEDIN_USER");
+					
+					if(this.toggleInbox)
+						setTareasList(service.getTareasByUserIdInbox(user.getId()));
+					else
+						setTareasList(service.getFinishedTareasByUserIdInbox(user.getId()));
 					
 					return "exito"; 
 					
@@ -165,10 +192,45 @@ public class BeanTareas implements Serializable{
 	    		   
 	    		   service.updateTarea(tarea);
 	    		   
-	    		   setTareasList(service.getAllTasks());
+	    		   Map<String,	Object>	session	= FacesContext
+							.getCurrentInstance()
+							.getExternalContext()
+							.getSessionMap();
+							
+					User user = (User) session.get("LOGGEDIN_USER");
+					
+					setTareasList(service.getTareasByUserIdInbox(user.getId()));
 	    	   } catch (Exception e) {
 	    		   e.printStackTrace();  
 	    	   }
+	       }
+	       
+	       public void updateTask(Task tarea) {
+	    	   TasksService service;
+	    	   
+	    	   try {
+	    		   service = Factories.services.createTaskService();
+	    		   
+	    		   service.updateTarea(tarea);
+	    		   
+	    		   Map<String,	Object>	session	= FacesContext
+							.getCurrentInstance()
+							.getExternalContext()
+							.getSessionMap();
+							
+					User user = (User) session.get("LOGGEDIN_USER");
+					
+					setTareasList(service.getTareasByUserIdInbox(user.getId()));
+					setTareasListSemana(service.getTareasByUserIdThisWeek(user.getId()));
+					setTareasListHoy(service.getTareasByUserIdToday(user.getId()));
+	    	   } catch (Exception e) {
+	    		   e.printStackTrace();  
+	    	   }
+	       }
+	       
+	       public void setDate(Task tarea, Date date) {
+	    	   
+	    	   tarea.setPlanned(date);
 	       }
 	       
 	       public String baja(Task tarea) {
@@ -188,6 +250,8 @@ public class BeanTareas implements Serializable{
 				  }
 				  
 	       }
+	       
+	       
 	       
 	       public String edit() {
 		       TasksService service;
@@ -262,6 +326,14 @@ public class BeanTareas implements Serializable{
 
 		public void setTareasListHoy(List<Task> tareasListHoy) {
 			this.tareasListHoy = tareasListHoy;
+		}
+
+		public boolean isToggleInbox() {
+			return toggleInbox;
+		}
+
+		public void setToggleInbox(boolean toggleInbox) {
+			this.toggleInbox = toggleInbox;
 		}
 
 		
