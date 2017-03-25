@@ -6,13 +6,12 @@
 	template="/templates/template-general.xhtml">
 
 	<ui:define name="titulo">
-      #{msgs.tituloHead}
+      #{msgs.tituloBorrarBase}
     </ui:define>
-    
 
 	<ui:define name="cuerpo">	
 		<h:form id="form-principal" rendered="#{logController.currentUser.isAdmin}">
-			¿Estás seguro? Al hacer esto reiniciarás la base de datos en su estado mínimo.
+			#{msgs.textoBorrarBase}
 			<br/>
 			<p:commandLink action="#{logController.borrarBase}"
 				value="#{msgs.si}">
