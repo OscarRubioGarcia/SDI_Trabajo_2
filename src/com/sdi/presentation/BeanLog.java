@@ -104,6 +104,17 @@ public class BeanLog implements Serializable {
 
 	}
 	
+	/**
+	 * Reinicia la base de datos
+	 * SEGURIDAD: comprueba que el usuario sea administrador (no se muestra en
+	 * la opción en la página)
+	 * @return
+	 */
+	public String borrarBase(){
+		System.out.println("HAS BORRADO LA BASE! MONSTRUO");
+		
+		return "exito";
+	}
 	public String getLogin() {
 		return login;
 	}

@@ -37,6 +37,10 @@
 					action="#{userController.listado}"
 					rendered="#{logController.currentUser.isAdmin}"/>
 					<p:separator />
+					<p:menuitem value="#{msgs.enlaceBorrarBase}" 
+					action="borrarBase"
+					rendered="#{logController.currentUser.isAdmin}"/>
+					<p:separator />
 					<p:menuitem value="#{msgs.enlaceListadoMain}"
 						action="#{listadosController.listado}" />
 						<p:separator />

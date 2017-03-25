@@ -44,6 +44,10 @@
 			<to-view-id>/error.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>index</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-action>#{listadosController.listado}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listadoMain.xhtml</to-view-id>
@@ -92,6 +96,19 @@
 			<from-outcome>alta</from-outcome>
 			<to-view-id>/altaForm.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>borrarBase</from-outcome>
+			<to-view-id>/borrarBase.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/borrarBase.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{logController.borrarBase}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/listadoUsers.xhtml</from-view-id>
