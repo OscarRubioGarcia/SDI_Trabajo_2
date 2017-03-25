@@ -29,10 +29,10 @@
   #{msgs.contra}
   <h:panelGroup>
 			<p:password value="#{logController.password}" required="true"
-				requiredMessage="#{msgs.formAlta_iduser_requiredMessage}"
-				validatorMessage="#{msgs.formAlta_iduser_validatorMessage}"
+				requiredMessage="#{msgs.formAlta_contra_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_contra_validatorMessage}"
 				id="password">
-				<f:validateLength minimum="5" maximum="8" />
+				<f:validateLength minimum="8"/>
 			</p:password>
 			<p:message for="password" />
 		</h:panelGroup>
@@ -40,14 +40,15 @@
   #{msgs.repiteContra}
   <h:panelGroup>
 			<p:password value="#{logController.password2}" required="true"
-				requiredMessage="#{msgs.formAlta_iduser_requiredMessage}"
-				validatorMessage="#{msgs.formAlta_iduser_validatorMessage}"
+				requiredMessage="#{msgs.formAlta_contra_requiredMessage}"
+				validatorMessage="#{msgs.formAlta_contra_validatorMessage}"
 				id="password2">
-				<f:validateLength minimum="5" maximum="8" />
+				<f:validateLength minimum="8"/>
 			</p:password>
-			<p:message for="password2" />
+			<p:message for="password2"/>
 		</h:panelGroup>
 		
+		<h:outputText id="msgAlta" value="#{msgs[logController.message]}" />
 		<p:commandButton value="#{msgs.botonSalvar}"
 			action="#{logController.salva}" update="Grid" process="@form">
 		</p:commandButton>

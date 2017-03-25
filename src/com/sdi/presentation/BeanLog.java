@@ -15,7 +15,7 @@ import com.sdi.model.User;
 public class BeanLog implements Serializable {
 	private static final long serialVersionUID = 55555L;
 
-	private String login="", password="", password2="", email="";
+	private String login="", password="", password2="", email="", message="nada";
 
 	private User currentUser;
 	
@@ -37,14 +37,13 @@ public class BeanLog implements Serializable {
 				return "error";
 			
 			setCurrentUser(localUser);
+			
 			// save user in session
+			FacesContext.getCurrentInstance()
+					.getExternalContext()
+					.getSessionMap()
+					.put("LOGGEDIN_USER", currentUser);
 			
-			Map<String, Object> session = FacesContext.getCurrentInstance()
-					.getExternalContext().getSessionMap();
-			//if (session.containsKey("LOGGEDIN_USER"))
-				//huir(); //cierra sesión abruptamente
-			
-			session.put("LOGGEDIN_USER", currentUser);
 			return "exito";
 		}catch(Exception e){
 			return "error";
@@ -79,13 +78,26 @@ public class BeanLog implements Serializable {
 			if ("".equals(login) || "".equals(email) || "".equals(password) ||
 					"".equals(password2) || !password.equals(password2))
 				return "error";
-				
+			
+			// ya existe
+			if (service.exists(login) != null){
+				setMessage("errorRegistroUsuarioExistente");
+				return "error";
+			}
+			
 			service.save(new User(login,email,password));
 			
-			this.password=password2="";
+			Map<String, Object> session = FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap();
 			
-			return log();
+			if (session.containsKey("LOGGEDIN_USER"))
+				session.remove("LOGGEDIN_USER");
+			
+			log();
 
+			this.password=password2="";
+
+			return "exito";
 		} catch (Exception e) {
 			return "error";
 		}
@@ -130,5 +142,13 @@ public class BeanLog implements Serializable {
 
 	public void setPassword2(String password2) {
 		this.password2 = password2;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

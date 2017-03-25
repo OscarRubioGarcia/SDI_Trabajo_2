@@ -61,5 +61,10 @@ public class SimpleUserService implements UsersService {
 			throws EntityNotFoundException {
 		return new UsersBuscar().find(login,password);
 	}
+
+	@Override
+	public User exists(String login) {
+		return new UsersBuscar().exists(login);
+	}
 	
 }

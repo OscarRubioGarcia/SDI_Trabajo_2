@@ -20,4 +20,5 @@ public interface UsersService {
 	public void deleteUser(Long id) throws EntityNotFoundException;
 	User findLoggable(String login, String password)
 			throws EntityNotFoundException;
+	public User exists(String login);
 }
