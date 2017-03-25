@@ -59,6 +59,16 @@
 			<to-view-id>/listadoSemana.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-action>#{userController.listado}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listadoUsers.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{logController.huir}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/log.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>alta</from-outcome>
 			<to-view-id>/altaForm.xhtml</to-view-id>
 		</navigation-case>
@@ -79,17 +89,8 @@
 	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{userController.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listadoUsers.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-outcome>alta</from-outcome>
 			<to-view-id>/altaForm.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>log</from-outcome>
-			<to-view-id>/log.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

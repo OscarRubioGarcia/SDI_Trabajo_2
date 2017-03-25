@@ -1,6 +1,7 @@
 package com.sdi.model;
 
 import java.util.Date;
+
 import alb.util.date.DateUtil;
 
 public class Task {
@@ -28,56 +29,63 @@ public class Task {
 		return title;
 	}
 	
-	public void setTitle(String title) {
+	public Task setTitle(String title) {
 		this.title = title;
+		return this;
 	}
 	
 	public String getComments() {
 		return comments;
 	}
 	
-	public void setComments(String comments) {
+	public Task setComments(String comments) {
 		this.comments = comments;
+		return this;
 	}
 	
 	public Date getCreated() {
 		return created;
 	}
 	
-	public void setCreated(Date created) {
+	public Task setCreated(Date created) {
 		this.created = created;
+		return this;
 	}
 	
 	public Date getPlanned() {
 		return planned;
 	}
 	
-	public void setPlanned(Date planned) {
+	public Task setPlanned(Date planned) {
 		this.planned = planned;
+		return this;
 	}
 	
 	public Date getFinished() {
 		return finished;
 	}
 	
-	public void setFinished(Date finished) {
+	public Task setFinished(Date finished) {
 		this.finished = finished;
+		return this;
 	}
 	
 	public Long getCategoryId() {
 		return categoryId;
 	}
 	
-	public void setCategoryId(Long category_id) {
+	public Task setCategoryId(Long category_id) {
 		this.categoryId = category_id;
+		return this;
 	}
 	
 	public Long getUserId() {
 		return userId;
 	}
 	
-	public void setUserId(Long user_id) {
+	public Task setUserId(Long user_id) {
 		this.userId = user_id;
+		return this;
 	}
 	
 	@Override

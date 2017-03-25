@@ -107,10 +107,17 @@ public class BeanUsers implements Serializable {
 	}
 
 	/**
-	 * Muestra todos los usuarios registrados
+	 * Muestra todos los usuarios registrados.
+	 * Si el usuario actual no es administrador, da error
 	 * @return
 	 */
 	public String listado() {
+		if (!((User)FacesContext
+				.getCurrentInstance()
+				.getExternalContext()
+				.getSessionMap().get("LOGGEDIN_USER")).getIsAdmin())
+			return "error";
+		
 		UsersService service;
 		try {
 			service = Factories.services.createUserService();

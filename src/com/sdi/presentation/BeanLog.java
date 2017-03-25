@@ -33,8 +33,12 @@ public class BeanLog implements Serializable {
 			
 			setCurrentUser(localUser);
 			// save user in session
+			
 			Map<String, Object> session = FacesContext.getCurrentInstance()
 					.getExternalContext().getSessionMap();
+			if (session.containsKey("LOGGEDIN_USER"))
+				huir(); //cierra sesión abruptamente
+			
 			session.put("LOGGEDIN_USER", currentUser);
 			return "exito";
 		}catch(Exception e){
@@ -47,10 +51,14 @@ public class BeanLog implements Serializable {
 	 * O esto o invalidate().
 	 */
 	public String huir(){
-		Map<String, Object> session = FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap();
-		session.remove("LOGGEDIN_USER");
-		session.put("LOGGEDIN_USER", null);
+		//Map<String, Object> session = FacesContext.getCurrentInstance()
+			//	.getExternalContext().getSessionMap();
+		//session.remove("LOGGEDIN_USER");
+		
+		//currentUser=null;
+		
+		FacesContext.getCurrentInstance()
+		.getExternalContext().invalidateSession();
 		
 		return "exito";
 	}
