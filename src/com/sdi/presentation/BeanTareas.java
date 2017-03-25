@@ -1,6 +1,7 @@
 package com.sdi.presentation;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,10 @@ import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import com.sdi.business.CategoriesService;
 import com.sdi.business.TasksService;
 import com.sdi.infrastructure.Factories;
+import com.sdi.model.Category;
 import com.sdi.model.Task;
 import com.sdi.model.User;
 
@@ -35,13 +38,15 @@ public class BeanTareas implements Serializable{
           private Date currentDate;
           private boolean toggleInbox = true;
           
+          private List<Category> categoryIds;
+          private List<Long> listIds;
+          
 		@PostConstruct
 		public void init() {
 			System.out.println("BeanTareas - PostConstruct");
 			
 			setCurrentDate(new Date());
 			
-			//Buscamos el alumno en la sesión. Esto es un patrón factoría claramente.
 			tarea = (BeanTarea)
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(new String("tarea"));
 			
@@ -51,6 +56,7 @@ public class BeanTareas implements Serializable{
 				tarea = new BeanTarea();
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put( "tarea", tarea);
 			}
+			
 		}
 	        
 		@PreDestroy
@@ -91,9 +97,10 @@ public class BeanTareas implements Serializable{
 	       
 	       public String listado() {
 		       TasksService service;
+		       CategoriesService cService;
 				  try {
 					service = Factories.services.createTaskService();
-					//tareas = (Task [])service.getAllTasks().toArray(new Task[0]);
+					cService = Factories.services.createCategoryService();
 					
 					Map<String,	Object>	session	= FacesContext
 							.getCurrentInstance()
@@ -103,6 +110,8 @@ public class BeanTareas implements Serializable{
 					User user = (User) session.get("LOGGEDIN_USER");
 					
 					setTareasList(service.getTareasByUserIdInbox(user.getId()));
+					setCategoryIds(cService.getAllCategoriesForUser(user.getId()));
+					setCategoryList();
 					mostrarTareas();
 					
 					return "exito"; 
@@ -111,6 +120,17 @@ public class BeanTareas implements Serializable{
 					e.printStackTrace();  
 					return "error";  
 				  }  
+	       }
+	       
+	       public void setCategoryList() {
+	    	   
+	    	   List<Long> list = new ArrayList<Long>();
+	    	   
+	    	   for(Category c : categoryIds) {
+	    		   list.add(c.getId());
+	    	   }
+	    	   
+	    	   setListIds(list);
 	       }
 	       
 	       public String mostrarTareas() {
@@ -125,10 +145,12 @@ public class BeanTareas implements Serializable{
 							
 					User user = (User) session.get("LOGGEDIN_USER");
 					
-					if(this.toggleInbox)
+					if(this.toggleInbox) {
 						setTareasList(service.getTareasByUserIdInbox(user.getId()));
-					else
+					}
+					else {
 						setTareasList(service.getFinishedTareasByUserIdInbox(user.getId()));
+					}
 					
 					return "exito"; 
 					
@@ -140,8 +162,11 @@ public class BeanTareas implements Serializable{
 	       
 	       public String listadoHoy() {
 		       TasksService service;
+		       CategoriesService cService;
+		       
 				  try {
 					service = Factories.services.createTaskService();
+					cService = Factories.services.createCategoryService();
 					
 					Map<String,	Object>	session	= FacesContext
 							.getCurrentInstance()
@@ -151,6 +176,8 @@ public class BeanTareas implements Serializable{
 					User user = (User) session.get("LOGGEDIN_USER");
 					
 					setTareasListHoy(service.getTareasByUserIdToday(user.getId()));
+					setCategoryIds(cService.getAllCategoriesForUser(user.getId()));
+					setCategoryList();
 					
 					return "exito"; 
 					
@@ -162,8 +189,11 @@ public class BeanTareas implements Serializable{
 	       
 	       public String listadoSemana() {
 		       TasksService service;
+		       CategoriesService cService;
+		       
 				  try {
 					service = Factories.services.createTaskService();
+					cService = Factories.services.createCategoryService();
 					
 					Map<String,	Object>	session	= FacesContext
 							.getCurrentInstance()
@@ -173,6 +203,8 @@ public class BeanTareas implements Serializable{
 					User user = (User) session.get("LOGGEDIN_USER");
 					
 					setTareasListSemana(service.getTareasByUserIdThisWeek(user.getId()));
+					setCategoryIds(cService.getAllCategoriesForUser(user.getId()));
+					setCategoryList();
 					
 					return "exito"; 
 					
@@ -220,7 +252,7 @@ public class BeanTareas implements Serializable{
 							
 					User user = (User) session.get("LOGGEDIN_USER");
 					
-					setTareasList(service.getTareasByUserIdInbox(user.getId()));
+					mostrarTareas();
 					setTareasListSemana(service.getTareasByUserIdThisWeek(user.getId()));
 					setTareasListHoy(service.getTareasByUserIdToday(user.getId()));
 	    	   } catch (Exception e) {
@@ -334,6 +366,22 @@ public class BeanTareas implements Serializable{
 
 		public void setToggleInbox(boolean toggleInbox) {
 			this.toggleInbox = toggleInbox;
+		}
+
+		public List<Category> getCategoryIds() {
+			return categoryIds;
+		}
+
+		public void setCategoryIds(List<Category> categoryIds) {
+			this.categoryIds = categoryIds;
+		}
+
+		public List<Long> getListIds() {
+			return listIds;
+		}
+
+		public void setListIds(List<Long> listIds) {
+			this.listIds = listIds;
 		}
 
 		
