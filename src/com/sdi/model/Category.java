@@ -5,6 +5,16 @@ public class Category {
 	private String name;
 	private Long userId;
 	
+	public Category() {
+		
+	}
+	
+	public Category(long id, String name, Long userId) {
+		this.id = id;
+		this.name = name;
+		this.userId = userId;
+	}
+
 	public String getName() {
 		return name;
 	}

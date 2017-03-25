@@ -36,6 +36,15 @@ public class CategoryDaoJdbcImpl implements CategoryDao {
 			);
 		return jdbcTemplate.getGeneratedKey();
 	}
+	
+	@Override
+	public int forceSave(Category dto) {
+		return jdbcTemplate.execute("CATEGORY_INSERT_FORCE",
+				dto.getId(),
+				dto.getName(), 
+				dto.getUserId()
+			);
+	}
 
 	@Override
 	public int update(Category dto) {

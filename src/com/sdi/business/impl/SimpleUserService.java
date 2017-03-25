@@ -66,5 +66,11 @@ public class SimpleUserService implements UsersService {
 	public User exists(String login) {
 		return new UsersBuscar().exists(login);
 	}
+
+	@Override
+	public int forceSave(User user) throws BusinessException,
+			EntityAlreadyExistsException {
+		return new UsersAlta().forceSave(user);
+	}
 	
 }

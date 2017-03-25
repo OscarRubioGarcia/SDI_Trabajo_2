@@ -10,7 +10,7 @@
     </ui:define>
 
 	<ui:define name="cuerpo">	
-		<h:form id="form-principal" rendered="#{logController.currentUser.isAdmin}">
+		<h:form id="form-principal" rendered="#{logController.currentUser.isAdmin}" >
 			#{msgs.textoBorrarBase}
 			<br/>
 			<p:commandLink action="#{logController.borrarBase}"

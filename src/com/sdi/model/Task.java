@@ -1,6 +1,7 @@
 package com.sdi.model;
 
 import java.util.Date;
+
 import alb.util.date.DateUtil;
 
 public class Task {
@@ -15,6 +16,22 @@ public class Task {
 	private Long categoryId;
 	private Long userId;
 	
+	public Task() {
+		
+	}
+	
+	public Task(String title, String comments, Date created, Date planned,
+			Date finished, Long categoryId, Long userId) {
+		super();
+		this.title = title;
+		this.comments = comments;
+		this.created = created;
+		this.planned = planned;
+		this.finished = finished;
+		this.categoryId = categoryId;
+		this.userId = userId;
+	}
+
 	public Long getId() {
 		return id;
 	}

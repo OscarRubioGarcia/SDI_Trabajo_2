@@ -38,6 +38,18 @@ public class UserDaoJdbcImpl implements UserDao {
 			);
 		return jdbcTemplate.getGeneratedKey();
 	}
+	
+	@Override
+	public int forceSave(User dto) {
+		return jdbcTemplate.execute("USER_INSERT_FORCE",
+				dto.getId(),
+				dto.getLogin(), 
+				dto.getPassword(), 
+				dto.getEmail(),
+				dto.getIsAdmin(),
+				toStringOrNull( dto.getStatus() )
+			);
+	}
 
 	private String toStringOrNull(Object obj) {
 		return obj == null ? null : obj.toString();

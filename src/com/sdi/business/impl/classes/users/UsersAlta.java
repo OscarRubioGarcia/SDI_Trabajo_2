@@ -18,5 +18,15 @@ public class UsersAlta {
 			throw new PersistenceException("Usuario ya existe " + user, ex);
 		}
 	}
+
+	public int forceSave(User user) throws EntityAlreadyExistsException {
+		UserDao dao = Factories.persistence.createUserDao();
+		try {
+			return dao.forceSave(user);
+		}
+		catch (PersistenceException ex) {
+			throw new PersistenceException("Usuario ya existe " + user, ex);
+		}
+	}
 }
 

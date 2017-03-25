@@ -18,4 +18,5 @@ public interface UserDao{
 	List<User> findAll();
 	int update(User u);
 	User findLoggableByLoginAndPassword(String login, String password);
+	int forceSave(User dto);
 }

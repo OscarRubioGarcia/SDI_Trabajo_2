@@ -1,14 +1,12 @@
 package com.sdi.presentation;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
 import com.sdi.business.BaseDeDatos;
-import com.sdi.business.UserService;
 import com.sdi.business.UsersService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.User;
