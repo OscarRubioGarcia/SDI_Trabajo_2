@@ -31,8 +31,16 @@
 					</th>
 				</tr>
 			</table>
-			<p:commandLink value="#{msgs.nuevoUsuario}" action="alta"></p:commandLink>
 			<p:menubar>
+				<p:submenu label="#{msgs.tituloOpciones}"
+					icon="ui-icon-document">
+					<p:menuitem value="#{msgs.nuevoUsuario}" 
+					action="alta" />
+					<p:separator />
+					<p:menuitem value="#{msgs.iniciarSession}" 
+					action="iniciarSession" />
+					<p:separator />
+				</p:submenu>
 				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
 					icon="ui-icon-document">
 					<p:menuitem value="#{msgs.enlaceIdiomaES}"
@@ -45,7 +53,7 @@
 		</h:form>
 
 		<ui:insert name="cuerpo">#{msgs.tituloDefectoCuerpo}</ui:insert>
-
+		
 	</h:body>
 </f:view>
 </html>

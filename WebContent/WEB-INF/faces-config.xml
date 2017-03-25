@@ -44,10 +44,6 @@
 			<to-view-id>/error.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>index</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-action>#{listadosController.listado}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listadoMain.xhtml</to-view-id>
@@ -63,13 +59,16 @@
 			<to-view-id>/listadoSemana.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{userController.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listadoUsers.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-action>#{logController.huir}</from-action>
 			<from-outcome>exito</from-outcome>
+			<to-view-id>/log.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>alta</from-outcome>
+			<to-view-id>/alta.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>iniciarSession</from-outcome>
 			<to-view-id>/log.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
@@ -85,55 +84,56 @@
 			<from-outcome>error</from-outcome>
 			<to-view-id>/log.xhtml</to-view-id>
 		</navigation-case>
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/alta.xhtml</to-view-id>
-		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{userController.listado}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listadoUsers.xhtml</to-view-id>
+		</navigation-case>
 		<navigation-case>
 			<from-outcome>alta</from-outcome>
 			<to-view-id>/altaForm.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>borrarBase</from-outcome>
-			<to-view-id>/borrarBase.xhtml</to-view-id>
+			<from-outcome>log</from-outcome>
+			<to-view-id>/log.xhtml</to-view-id>
 		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/borrarBase.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{logController.borrarBase}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/listadoUsers.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{userController.baja(vuser)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/listadoUsers.xhtml</to-view-id>
+			<to-view-id>/listado.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{userController.changeStatus(vuser)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listadoUsers.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-action>#{userController.baja(vuser)}</from-action>
+			<from-outcome>exit</from-outcome>
+			<to-view-id>/confirma.xhtml</to-view-id>
+		</navigation-case>
+		
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/alta.xhtml</from-view-id>
+		<from-view-id>/altaForm.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{logController.salva}</from-action>
+			<from-action>#{controller.salva}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
+			<to-view-id>/listado.xhtml</to-view-id>
 		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/editForm.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{logController.salva}</from-action>
-			<from-outcome>error</from-outcome>
-			<to-view-id>/alta.xhtml</to-view-id>
+			<from-action>#{controller.salva}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listado.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
