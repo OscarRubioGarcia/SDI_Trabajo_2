@@ -108,7 +108,7 @@ public class BeanUsers implements Serializable {
 
 	/**
 	 * Muestra todos los usuarios registrados.
-	 * Si el usuario actual no es administrador, da error
+	 * SEGURIDAD: Si el usuario actual no es administrador, da error
 	 * @return
 	 */
 	public String listado() {
@@ -144,14 +144,14 @@ public class BeanUsers implements Serializable {
 		CategoriesService categoryService;
 		
 		try {
-			service = Factories.services.createUserService();
-			service.deleteUser(user.getId()); // CHRSN: or delete?
-			
 			taskService = Factories.services.createTaskService();
 			taskService.deleteTareaByUserId(user.getId());
 			
 			categoryService = Factories.services.createCategoryService();
 			categoryService.deleteAllByUserId(user.getId());
+			
+			service = Factories.services.createUserService();
+			service.deleteUser(user.getId());
 			
 			users = (User[]) service.listUsers().toArray(new User[0]);
 
@@ -165,17 +165,17 @@ public class BeanUsers implements Serializable {
 
 	}
 
-	public String edit(User user) {
-		UsersService service;
-		try {
-			service = Factories.services.createUserService();
-			service.update(user);
-			return "exito";
-		} catch (Exception e) {
-			return "error";
-		}
-
-	}
+//	public String edit(User user) {
+//		UsersService service;
+//		try {
+//			service = Factories.services.createUserService();
+//			service.update(user);
+//			return "exito";
+//		} catch (Exception e) {
+//			return "error";
+//		}
+//
+//	}
 
 	public String salva() {
 		UsersService service;

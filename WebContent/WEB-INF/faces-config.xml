@@ -98,34 +98,20 @@
 		<navigation-case>
 			<from-action>#{userController.baja(vuser)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
+			<to-view-id>/listadoUsers.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{userController.changeStatus(vuser)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listadoUsers.xhtml</to-view-id>
 		</navigation-case>
-		<navigation-case>
-			<from-action>#{userController.baja(vuser)}</from-action>
-			<from-outcome>exit</from-outcome>
-			<to-view-id>/confirma.xhtml</to-view-id>
-		</navigation-case>
-		
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/altaForm.xhtml</from-view-id>
+		<from-view-id>/alta.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
+			<from-action>#{logController.salva}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/editForm.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
+			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
