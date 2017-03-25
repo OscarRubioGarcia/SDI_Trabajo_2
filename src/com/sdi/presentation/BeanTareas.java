@@ -63,6 +63,30 @@ public class BeanTareas implements Serializable{
 		public void end() {
 		System.out.println("BeanTareas - PreDestroy");
 		}
+		
+		public String cargarForm() {
+			
+			CategoriesService cService;
+			  try {
+				cService = Factories.services.createCategoryService();
+			
+				Map<String,	Object>	session	= FacesContext
+						.getCurrentInstance()
+						.getExternalContext()
+						.getSessionMap();
+						
+				User user = (User) session.get("LOGGEDIN_USER");
+				
+				setCategoryIds(cService.getAllCategoriesForUser(user.getId()));
+				setCategoryList();
+				
+				return "exito";
+			  } catch (Exception e) {
+				  e.printStackTrace();  
+				  return "error";
+			  }
+
+		}
           
 		  
 		  public Task[] getTareas () {
@@ -302,16 +326,39 @@ public class BeanTareas implements Serializable{
 	       public String salva() {
 		       TasksService service;
 				  try {
+					  
+					Map<String,	Object>	session	= FacesContext
+							.getCurrentInstance()
+							.getExternalContext()
+							.getSessionMap();
+							
+					User user = (User) session.get("LOGGEDIN_USER");
+					
 					service = Factories.services.createTaskService();
+					
+					tarea.setCreated(currentDate);
+					tarea.setUserId(user.getId());
+					tarea.setFinished(null);
+					tarea.setComments(null);
+					
 					if (tarea.getId() == null) {
 						service.saveTarea(tarea);  
 					}
 					else {
 						service.updateTarea(tarea); 
-					} 
-					tareas = (Task [])service.getAllTasks().toArray(new Task[0]);
-					setTareasList(service.getAllTasks());
-					return "exito"; 
+					}
+					
+					mostrarTareas();
+					setTareasListSemana(service.getTareasByUserIdThisWeek(user.getId()));
+					setTareasListHoy(service.getTareasByUserIdToday(user.getId()));
+					
+					if(tarea.getCategoryId()!=null)
+						if(tarea.getPlanned().compareTo(this.currentDate) == 0)
+							return "hoy"; 
+						else
+							return "semana";
+					else
+						return "inbox";
 					
 				  } catch (Exception e) {
 					  e.printStackTrace();

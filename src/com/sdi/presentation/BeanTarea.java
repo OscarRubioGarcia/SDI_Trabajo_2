@@ -17,10 +17,10 @@ public class BeanTarea extends Task implements Serializable {
 	private static final long serialVersionUID = 55557L;
 	
 	public BeanTarea() {
-		iniciaAlumno(null);
+		iniciaTarea(null);
 	}
 	
-	public void setAlumno(Task task) {
+	public void setTarea(Task task) {
 		setId(task.getId());
 		setCategoryId(task.getCategoryId());
 		setComments(task.getComments());
@@ -31,7 +31,7 @@ public class BeanTarea extends Task implements Serializable {
 		setUserId(task.getUserId());
 	}
 	
-	public void iniciaAlumno(ActionEvent event) {
+	public void iniciaTarea(ActionEvent event) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ResourceBundle bundle =
 		facesContext.getApplication().getResourceBundle(facesContext, "msgs");

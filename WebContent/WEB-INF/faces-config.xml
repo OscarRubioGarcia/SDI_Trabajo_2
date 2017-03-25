@@ -70,6 +70,16 @@
 		<navigation-case>
 			<from-outcome>iniciarSession</from-outcome>
 			<to-view-id>/log.xhtml</to-view-id>
+		</navigation-case> 
+		<navigation-case>
+			<from-action>#{listadosController.cargarForm}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/crearTareaForm.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{listadosController.cargarForm}</from-action>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -118,22 +128,28 @@
 			<from-outcome>exit</from-outcome>
 			<to-view-id>/confirma.xhtml</to-view-id>
 		</navigation-case>
-		
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/altaForm.xhtml</from-view-id>
+		<from-view-id>/crearTareaForm.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
+			<from-action>#{listadosController.salva}</from-action>
+			<from-outcome>inbox</from-outcome>
+			<to-view-id>/listadoMain.xhtml</to-view-id>
 		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/editForm.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
+			<from-action>#{listadosController.salva}</from-action>
+			<from-outcome>hoy</from-outcome>
+			<to-view-id>/listadoHoy.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{listadosController.salva}</from-action>
+			<from-outcome>semana</from-outcome>
+			<to-view-id>/listadoSemana.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{listadosController.salva}</from-action>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

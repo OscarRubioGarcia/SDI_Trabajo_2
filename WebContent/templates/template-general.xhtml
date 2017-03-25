@@ -46,12 +46,15 @@
 					<p:separator />
 					<p:menuitem value="#{msgs.enlaceListadoMain}"
 						action="#{listadosController.listado}" />
-						<p:separator />
+					<p:separator />
 					<p:menuitem value="#{msgs.enlaceListadoHoy}"
 						action="#{listadosController.listadoHoy}" />
-						<p:separator />
+					<p:separator />
 					<p:menuitem value="#{msgs.enlaceListadoSemana}"
 						action="#{listadosController.listadoSemana}" />
+					<p:separator />
+					<p:menuitem value="#{msgs.enlaceCrearTarea}"
+						action="#{listadosController.cargarForm}" />
 				</p:submenu>
 				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
 					icon="ui-icon-document">
