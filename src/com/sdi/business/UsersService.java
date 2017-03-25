@@ -18,4 +18,6 @@ public interface UsersService {
 	public User findAdmin(String name, String pass) throws EntityNotFoundException;
 	public User find(String login, String password) throws EntityNotFoundException;
 	public void deleteUser(Long id) throws EntityNotFoundException;
+	User findLoggable(String login, String password)
+			throws EntityNotFoundException;
 }

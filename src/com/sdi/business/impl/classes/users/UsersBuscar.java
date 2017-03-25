@@ -7,17 +7,7 @@ import com.sdi.persistence.UserDao;
 
 public class UsersBuscar {
 
-	public User find(long id) throws EntityNotFoundException {
-		UserDao dao = Factories.persistence.createUserDao();
-		User u = dao.findById(id);
-		if ( u == null) {
-			throw new EntityNotFoundException("No se ha encontrado el usuario");
-		}
-		
-		return u;
-	}
-	
-	public User find(String name, String pass) throws EntityNotFoundException{
+	public User find(String name, String pass) throws EntityNotFoundException {
 		UserDao dao = Factories.persistence.createUserDao();
 		User u = dao.findByLoginAndPassword(name, pass);
 		if ( u == null) {
@@ -27,8 +17,18 @@ public class UsersBuscar {
 		return u;
 	}
 	
+	public User findLoggable(String name, String pass) throws EntityNotFoundException{
+		UserDao dao = Factories.persistence.createUserDao();
+		User u = dao.findLoggableByLoginAndPassword(name, pass);
+		if ( u == null) {
+			throw new EntityNotFoundException("No se ha encontrado el usuario");
+		}
+		
+		return u;
+	}
+	
 	public User findAdmin(String name,String pass) throws EntityNotFoundException{
-		User u = find(name,pass); 
+		User u = findLoggable(name,pass); 
 		return u.getIsAdmin()? u:null;
 	}
 }

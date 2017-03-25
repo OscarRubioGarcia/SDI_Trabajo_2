@@ -68,10 +68,6 @@
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/log.xhtml</to-view-id>
 		</navigation-case>
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
-		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/log.xhtml</from-view-id>
@@ -84,6 +80,10 @@
 			<from-action>#{logController.log}</from-action>
 			<from-outcome>error</from-outcome>
 			<to-view-id>/log.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>alta</from-outcome>
+			<to-view-id>/alta.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

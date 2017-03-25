@@ -17,4 +17,5 @@ public interface UserDao{
 	Long save(User u) throws AlreadyPersistedException;
 	List<User> findAll();
 	int update(User u);
+	User findLoggableByLoginAndPassword(String login, String password);
 }

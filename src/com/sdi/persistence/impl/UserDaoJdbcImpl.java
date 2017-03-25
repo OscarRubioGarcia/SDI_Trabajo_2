@@ -93,6 +93,15 @@ public class UserDaoJdbcImpl implements UserDao {
 	}
 
 	@Override
+	public User findLoggableByLoginAndPassword(String login, String password) {
+		return jdbcTemplate.queryForObject(
+				"USER_FIND_LOGGABLE_BY_LOGIN_AND_PASSWORD", 
+				new UserMapper(), 
+				login, password
+			);
+	}
+	
+	@Override
 	public void enableUser(Long id) {
 		jdbcTemplate.execute("USER_UPDATE_STATUS", 
 				"ENABLED",

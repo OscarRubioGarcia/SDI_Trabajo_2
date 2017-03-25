@@ -24,8 +24,7 @@
 					<p:column sortBy="#{vuser.status}">
 						<f:facet name="header">#{msgs.tablaStatus}</f:facet>
 						<p:commandLink action="#{userController.changeStatus(vuser)}" type="submit"
-							value="#{vuser.status}" immediate="true" update = "tablalistado"
-							ajax = "false">
+							value="#{vuser.status}" immediate="true" update = "tablalistado">
 						</p:commandLink>
 					</p:column>
 					<p:column>

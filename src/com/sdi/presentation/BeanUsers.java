@@ -25,7 +25,7 @@ public class BeanUsers implements Serializable {
 	@ManagedProperty(value = "#{user}")
 	private BeanUser user;
 
-	private User userr;
+	//private User userr;
 	
 	private String login="", password="";
 	
@@ -84,7 +84,7 @@ public class BeanUsers implements Serializable {
 		this.user = user;
 	}
 	public void setUserr(User user) {
-		this.userr =  user;
+		//this.userr =  user;
 	}
 	public BeanUser getUser() {
 		return user;
@@ -128,7 +128,6 @@ public class BeanUsers implements Serializable {
 			return "exito"; // vamos a vista listadoUsers.xhtml
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "error";
 		}
 
@@ -176,26 +175,6 @@ public class BeanUsers implements Serializable {
 //		}
 //
 //	}
-
-	public String salva() {
-		UsersService service;
-		try {
-			service = Factories.services.createUserService();
-			if (user.getId() == null) {
-				service.save(user);
-			} else {
-				service.update(user);
-			}
-			users = (User[]) service.listUsers().toArray(new User[0]);
-			setUsersList(service.listUsers());
-			return "exito";
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "error";
-		}
-
-	}
 	
 	public String changeStatus(User userr){
 		UsersService service;
@@ -205,6 +184,10 @@ public class BeanUsers implements Serializable {
 				service.disableUser(userr.getId());
 			else
 				service.enableUser(userr.getId());
+			
+			users = (User[]) service.listUsers().toArray(new User[0]);
+
+			setUsersList(service.listUsers());
 			
 			return "exito";
 		} catch(Exception e){
