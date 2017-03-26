@@ -25,8 +25,12 @@ public class BeanUsers implements Serializable {
 	@ManagedProperty(value = "#{user}")
 	private BeanUser user;
 
-	//private User userr;
+	private User userr;
 	
+	public User getUserr() {
+		return userr;
+	}
+
 	private String login="", password="";
 	
 	public String getLogin() {
@@ -133,29 +137,35 @@ public class BeanUsers implements Serializable {
 
 	}
 
+	
+	public String preBaja(User user){
+		this.userr=user;
+		return "exito";
+	}
 	/**
 	 * elimina a un usuario, sus tareas y sus categorías
-	 * @param user
 	 */
-	public String baja(User user) {
+	public String baja() {
 		UsersService service;
 		TasksService taskService;
 		CategoriesService categoryService;
 		
 		try {
 			taskService = Factories.services.createTaskService();
-			taskService.deleteTareaByUserId(user.getId());
+			taskService.deleteTareaByUserId(userr.getId());
 			
 			categoryService = Factories.services.createCategoryService();
-			categoryService.deleteAllByUserId(user.getId());
+			categoryService.deleteAllByUserId(userr.getId());
 			
 			service = Factories.services.createUserService();
-			service.deleteUser(user.getId());
+			service.deleteUser(userr.getId());
 			
 			users = (User[]) service.listUsers().toArray(new User[0]);
 
 			setUsersList(service.listUsers());
 
+			userr = null;
+			
 			return "exito";
 
 		} catch (Exception e) {
