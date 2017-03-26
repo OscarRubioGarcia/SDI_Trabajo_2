@@ -14,10 +14,11 @@
 			#{msgs.textoBorrarUsuario} #{userController.userr.login}
 			<br/>
 			<p:commandLink action="#{userController.baja}"
-				value="#{msgs.si}">
+				value="#{msgs.si}" id="borrarSi">
 			</p:commandLink>
 			<br/>
-			<p:commandLink action="listadoUsuarios" value="#{msgs.no}">
+			<p:commandLink action="listadoUsuarios" value="#{msgs.no}"
+			id="borrarNo">
 			</p:commandLink>
 		</h:form>
 	</ui:define>

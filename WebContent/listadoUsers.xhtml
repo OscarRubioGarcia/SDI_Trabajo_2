@@ -10,19 +10,19 @@
   </ui:define>
 
 	<ui:define name="cuerpo">
-		<h:form>
-			<p:panel header="#{msgs.tituloOperacionListado}">
+		<h:form id="form">
+			<p:panel header="#{msgs.tituloOperacionListado}" id="panel">
 				<p:dataTable var="vuser" id="tablalistado" value="#{userController.usersList}" border="1">
 					<p:column>
-						<f:facet name="header">#{msgs.tablaIdUser}</f:facet>#{vuser.id}</p:column>
-					<p:column>
-						<f:facet name="header">#{msgs.tablaCorreo}</f:facet>#{vuser.email}</p:column>
-					<p:column sortBy="#{vuser.login}">
-						<f:facet name="header">#{msgs.tablaNombre}</f:facet>#{vuser.login}</p:column>
-					<p:column sortBy="#{vuser.isAdmin}">
-						<f:facet name="header">#{msgs.tablaIsAdmin}</f:facet>#{vuser.isAdmin}</p:column>
-					<p:column sortBy="#{vuser.status}">
-						<f:facet name="header">#{msgs.tablaStatus}</f:facet>
+						<f:facet name="header" id="headerID">#{msgs.tablaIdUser}"</f:facet>#{vuser.id}</p:column>
+					<p:column sortBy="#{vuser.email}" id="email">
+						<f:facet name="header" id="headerEmail">#{msgs.tablaCorreo}</f:facet>#{vuser.email}</p:column>
+					<p:column sortBy="#{vuser.login}" id="login">
+						<f:facet name="header" id="headerLogin">#{msgs.tablaNombre}</f:facet>#{vuser.login}</p:column>
+					<p:column  id="admin">
+						<f:facet name="header" id="headerAdmin">#{msgs.tablaIsAdmin}</f:facet>#{vuser.isAdmin}</p:column>
+					<p:column sortBy="#{vuser.status}" id="status">
+						<f:facet name="header" id="headerStatus">#{msgs.tablaStatus}</f:facet>
 						<p:commandLink action="#{userController.changeStatus(vuser)}" type="submit"
 							value="#{vuser.status}" immediate="true" update = "tablalistado"
 							ajax = "false">
