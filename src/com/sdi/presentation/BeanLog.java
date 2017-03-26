@@ -77,9 +77,15 @@ public class BeanLog implements Serializable {
 			service = Factories.services.createUserService();
 
 			if ("".equals(login) || "".equals(email) || "".equals(password) ||
-					"".equals(password2) || !password.equals(password2))
+					"".equals(password2))
 				return "error";
 			
+			// contraseñas diferentes
+			if (!password.equals(password2)){
+				setMessage("errorContrasenaDiferente");
+				return "error";
+			}
+				
 			// ya existe
 			if (service.exists(login) != null){
 				setMessage("errorRegistroUsuarioExistente");
@@ -107,7 +113,7 @@ public class BeanLog implements Serializable {
 	
 	/**
 	 * Reinicia la base de datos
-	 * SEGURIDAD: comprueba que el usuario sea administrador (no se muestra en
+	 * SEGURIDAD: comprueba que el usuario sea administrador (no se muestra
 	 * la opción en la página)
 	 * @return
 	 */
@@ -118,8 +124,6 @@ public class BeanLog implements Serializable {
 			BaseDeDatos.iniciaCategorias();
 			BaseDeDatos.iniciaTareas();
 			
-			System.out.println("HAS BORRADO LA BASE! MONSTRUO");
-
 			return "exito";
 		} catch(Exception e){
 			return "error";
