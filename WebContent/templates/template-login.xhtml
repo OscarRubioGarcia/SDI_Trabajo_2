@@ -33,16 +33,16 @@
 			</table>
 			<p:menubar>
 				<p:submenu label="#{msgs.tituloOpciones}"
-					icon="ui-icon-document">
+					icon="ui-icon-document" id="misubmenu1">
 					<p:menuitem value="#{msgs.nuevoUsuario}" 
-					action="alta" />
+					action="alta" id="nuevoUser"/>
 					<p:separator />
 					<p:menuitem value="#{msgs.iniciarSession}" 
-					action="iniciarSession" />
+					action="iniciarSession" id="iniciarSession"/>
 					<p:separator />
 				</p:submenu>
 				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
-					icon="ui-icon-document">
+					icon="ui-icon-document" id="misubmenu2">
 					<p:menuitem value="#{msgs.enlaceIdiomaES}"
 						actionListener="#{settings.setSpanish}" update="@all" />
 					<p:menuitem value="#{msgs.enlaceIdiomaEN}"

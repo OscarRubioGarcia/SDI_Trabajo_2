@@ -29,7 +29,7 @@
 					<p:column>
 						<f:facet name="header">#{msgs.tablaID}</f:facet>#{vtask.id}</p:column>
 					
-					<p:column headerText="#{msgs.tablaPlaneado}" sortBy="#{vtask.planned}">
+					<p:column headerText="#{msgs.tablaPlaneado}" sortBy="#{vtask.planned}" id="sortPlanned">
        					<p:cellEditor>
 			               <f:facet name="output"><h:outputText value="#{vtask.planned}" styleClass="#{vtask.planned le (listadosController.currentDate) ? 'red' : null}"/></f:facet>
 			               <f:facet name="input">
@@ -40,7 +40,7 @@
            				</p:cellEditor>
         			</p:column>
 						
-					<p:column filterBy="#{vtask.title}" headerText="#{msgs.tablaNombreTarea}" filterMatchMode="contains">
+					<p:column filterBy="#{vtask.title}" headerText="#{msgs.tablaNombreTarea}" filterMatchMode="contains" id="filterTitle" >
            				<p:cellEditor>
 			               <f:facet name="output"><h:outputText value="#{vtask.title}" styleClass="#{vtask.finished ne null ? 'green' : null}" /></f:facet>
 			               <f:facet name="input"><p:inputText id="tittleInput" value="#{vtask.title}" /></f:facet>
